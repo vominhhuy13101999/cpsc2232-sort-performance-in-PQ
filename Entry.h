@@ -38,12 +38,12 @@ template<typename K, typename V> class Entry {
    * Returns the key stored in this entry.
    * @return the entry's key
    */
-  virtual K getKey() = 0;
+  virtual K getKey() const= 0;
 
   /**
    * Returns the value stored in this entry.
    * @return the entry's value
    */
-  virtual V getValue() = 0;
+  virtual V getValue() const= 0;
 };
 #endif

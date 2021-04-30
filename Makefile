@@ -1,4 +1,12 @@
-all: PerformanceTest.exe
+# # all: PerformanceTest.exe
+# all: PerformanceTest
+# # PerformanceTest.exe: Entry.h MyPQSort.h PerformanceTest.cpp PriorityQueue.h PriorityQueueImpl.cpp PriorityQueueImpl.h
+# PerformanceTest:
+# 	g++ -std=c++14 PriorityQueueImpl.cpp test.cpp -o PerformanceTest.exe
 
-PerformanceTest.exe: Entry.cpp Entry.cpp Entry.h MyPQSort.h PerformanceTest.cpp PriorityQueue.h PriorityQueueImpl.cpp PriorityQueueImpl.h
-	g++ -std=c++11 *.cpp -o PerformanceTest.exe
+
+
+all: PerformanceTest
+# PerformanceTest.exe: Entry.h MyPQSort.h PerformanceTest.cpp PriorityQueue.h PriorityQueueImpl.cpp PriorityQueueImpl.h
+PerformanceTest:
+	g++ -std=c++14 PriorityQueueImpl.cpp PriorityQueueTest.cpp -o PerformanceTest.exe
