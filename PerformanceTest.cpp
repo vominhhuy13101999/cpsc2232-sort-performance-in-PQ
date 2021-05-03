@@ -32,7 +32,7 @@ void TimeForSortingNStrings(int N)
 	{
 		vector<string> stringsToSort = getNRandomStrings(N);
 		high_resolution_clock::time_point startTime = high_resolution_clock::now();
-		vector<string> sortedStrings = mySort.sort(stringsToSort);
+		vector<string> sortedStrings = mySort.Sort(stringsToSort);
 		std::this_thread::sleep_for (std::chrono::seconds(1));
 		high_resolution_clock::time_point endTime = high_resolution_clock::now();
 		duration<double> time_span = duration_cast<duration<double> >(endTime - startTime);
@@ -45,7 +45,7 @@ void TimeForSortingNStrings(int N)
 		if (best > thisTime) {
 			best = thisTime;
 		}
-							
+				
 		if (!isSorted(sortedStrings)) 
 		{
 			throw "This list of strings is not sorted.";

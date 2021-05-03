@@ -17,89 +17,65 @@ bool PriorityQueueImpl::isEmpty() const
 	return len==0;
 }
 
-void PriorityQueueImpl::insert(const ConcreteEntry& e)
-{
-	ConcreteEntry* e1=new ConcreteEntry(e.getKey(), e.getValue()); 
-	if (len == 0) {
-		head= new Node();
-		C=new Comparator();
-		//cout<<"----------------"<<endl;
-		head->entry = e1;
-		//cout<<"----------------"<<endl;
+void PriorityQueueImpl::insert(const std::string& e, Node<std::string>*& n)
+{	
+	if (n==nullptr){
+		// cout<<"---------------------"<<endl;
+		n=new  Node<std::string>();
+		// cout<<n<<endl;
 
-		tail=head;
-	}
-	else if(C->compare(e1,head->entry)){
-		Node* n= new Node();
-		n->entry= e1;
-		n->next=head;
-		head=n;
-		
 
-		
+		n->entry=e;
+		// n->left=nullptr;
+		// n->right=nullptr;
+		len++;
+
+
 
 	}
-	else if(len==1){
-		Node* n= new Node();
-		n->entry= e1;
-		head->next=n;
-		tail=n;
-
-		
+	else if (e.compare(n->entry)<0){
+		this->insert(e, n->left);
+	}
+	else {
+		this->insert(e, n->right);
 
 	}
-	else if (C->compare(tail->entry,e1)){
-		Node* n= new Node();
-		n->entry= e1;
-		tail->next=n;
-		tail=n;
-
-	}
-
-	else{
-
-
-
-
-		Node* n=head;
-		for (int i=0;i<len-1; i++){
-
-			if (C->compare(e1,n->next->entry)){
-				Node* n1= new Node();
-				n1->entry= e1;
-				n1->next=n->next;
-				n->next=n1;
-				break;
-	}
-		n=n->next;
-		}
-	}
-	len++;
 }
 
-const ConcreteEntry& PriorityQueueImpl::min() const throw(QueueEmpty)
+const string PriorityQueueImpl::min() const throw(QueueEmpty)
 {
 	if (len==0){
 		QueueEmpty QE;
 		throw QE ;
 	}
 	else{
-		return (*head->entry);
+		Node<string>* n=head;
+		
+		
+		while(n->left!=nullptr){
+			n=n->left;
+		}
+		return n->entry;
 	}
 
 }
 
-ConcreteEntry& PriorityQueueImpl::removeMin() throw(QueueEmpty)
+Node<string>& PriorityQueueImpl::removeMin(Node<string>*& n) throw(QueueEmpty)
 {
-	if (len<1){
+	if (n==nullptr){
 		QueueEmpty QE;
 		throw QE ;
 	}
 	else{
-		ConcreteEntry& a = (*head->entry);
-		head=head->next;
-		len--;
-		return  a;
+		if (n->left!=nullptr){
+			return removeMin( n->left);
+		}
+		else {
+			Node<string>* r=n;
+			n=n->right;
+			len--;
+			return *r;
+		}
 	}
 }
 
